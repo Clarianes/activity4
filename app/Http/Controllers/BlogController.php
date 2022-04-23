@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $blogs = Blog::all();
 
-        return view('Student.index', compact('students'))
-            ->with('students', $students);
+        return view('Blog.index', ['blogs' => $blogs]);
     }
 
     /**
@@ -49,10 +48,10 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $students = Student::find($id);
+        $blogs = Blog::find($id);
 
-        return view('Student.show')
-            ->with('student', $students);
+        abort_if(!$blogs, 404);
+        return view('Blog.show', ['show' => $blogs]);
     }
 
     /**
